@@ -1,9 +1,15 @@
 function createUserQueryValues(user) {
+  const {
+    name: { first, last },
+    email,
+    login: { sha256: password },
+    phone
+  } = user;
   return `(
-        '${user.name}',
-        '${user.email}',
-        '${user.password}',
-        '${user.phoneNum}'
+        '${first} ${last}',
+        '${email}',
+        '${password}',
+        '${phone}'
     )`;
 }
 
@@ -30,5 +36,5 @@ const users = [
 
 export const mapUsers = (users) => {
   const usersElems = users.map(createUserQueryValues);
-  return usersElems.join(',');
+  return usersElems.join(",");
 };
